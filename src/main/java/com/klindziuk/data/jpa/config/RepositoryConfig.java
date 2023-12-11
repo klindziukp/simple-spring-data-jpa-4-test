@@ -13,6 +13,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("com.klindziuk.data.jpa")
 @EnableJpaRepositories("com.klindziuk.data.jpa")
 @Import(OrmConfig.class)
-public class JpaConfig {
+public class RepositoryConfig {
 
 }

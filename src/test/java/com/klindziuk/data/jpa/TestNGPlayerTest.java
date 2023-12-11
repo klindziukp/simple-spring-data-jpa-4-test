@@ -4,7 +4,7 @@
 
 package com.klindziuk.data.jpa;
 
-import com.klindziuk.data.jpa.config.JpaConfig;
+import com.klindziuk.data.jpa.config.RepositoryConfig;
 import com.klindziuk.data.jpa.data.TestDataStorage;
 import com.klindziuk.data.jpa.model.Player;
 import com.klindziuk.data.jpa.repository.PlayerRepository;
@@ -19,7 +19,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-@ContextConfiguration(classes = JpaConfig.class)
+@ContextConfiguration(classes = RepositoryConfig.class)
 public class TestNGPlayerTest extends AbstractTestNGSpringContextTests {
 
   public static final Logger LOGGER = LogManager.getLogger(TestNGPlayerTest.class);

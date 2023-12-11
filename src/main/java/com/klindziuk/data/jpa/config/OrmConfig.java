@@ -8,7 +8,6 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -24,11 +23,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Import(DatabaseConfig.class)
 public class OrmConfig {
 
-  @Autowired
-  DatabaseConfig databaseConfig;
-
+  /**
+   * Returns DataSource
+   *
+   * @return DataSource
+   */
   @Bean("dataSource")
-  DataSource dataSource() {
+  DataSource dataSource(DatabaseConfig databaseConfig) {
     HikariConfig dataSourceProperties = new HikariConfig();
     dataSourceProperties.setJdbcUrl(databaseConfig.getJdbcUrl());
     dataSourceProperties.setUsername(databaseConfig.getUser());
@@ -36,8 +37,16 @@ public class OrmConfig {
     return new HikariDataSource(dataSourceProperties);
   }
 
+  /**
+   * Returns LocalContainerEntityManagerFactoryBean
+   *
+   * @param dataSource     java sql DataSource
+   * @param databaseConfig database config
+   * @return LocalContainerEntityManagerFactoryBean
+   */
   @Bean("entityManagerFactory")
-  public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+  public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
+      DatabaseConfig databaseConfig) {
     HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
     vendorAdapter.setDatabase(Database.POSTGRESQL);
     vendorAdapter.setShowSql(true);

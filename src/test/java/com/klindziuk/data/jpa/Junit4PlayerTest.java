@@ -4,7 +4,7 @@
 
 package com.klindziuk.data.jpa;
 
-import com.klindziuk.data.jpa.config.JpaConfig;
+import com.klindziuk.data.jpa.config.RepositoryConfig;
 import com.klindziuk.data.jpa.data.TestDataStorage;
 import com.klindziuk.data.jpa.model.Player;
 import com.klindziuk.data.jpa.repository.PlayerRepository;
@@ -21,14 +21,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ContextConfiguration(classes = JpaConfig.class)
+@ContextConfiguration(classes = RepositoryConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class Junit4PlayerTest {
 
   public static final Logger LOGGER = LogManager.getLogger(Junit4PlayerTest.class);
 
-  @Autowired
-  PlayerRepository playerRepository;
+  @Autowired PlayerRepository playerRepository;
 
   @Before
   public void before() {
